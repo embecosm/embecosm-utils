@@ -71,8 +71,8 @@ then
 fi
 
 inf=$1
-indir=$(dirname ${inf})
-inbase=$(basename ${inf})
+indir=$(dirname "${inf}")
+inbase=$(basename "${inf}")
 inext="${inbase##*.}"
 infile="${inbase%.*}"
 
@@ -89,5 +89,5 @@ then
     cp ${inf} ${outf}
 else
     gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 \
-       -dPDFSETTINGS=${compress_level} -sOutputFile=${outf} ${inf}
+       -dPDFSETTINGS=${compress_level} -sOutputFile="${outf}" "${inf}"
 fi
