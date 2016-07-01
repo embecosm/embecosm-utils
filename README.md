@@ -8,3 +8,8 @@ See the file `COPYING` for details.
 
 Takes a PDF file and compresses it by reducing the rendering quality with
 GhostScript.
+
+## rcmd-dump
+
+Takes the hex encoded ASCII used by the GDB remote serial protocol qRcmd
+packet and converts it to ASCII for ease of reading.

@@ -1,3 +1,9 @@
+2016-07-01  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* Makefile: Created.
+	* README.md: Document rcmd-dump
+	* rcmd-dump.c: Created,
+
 2016-05-23  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* compress-pdf.sh: Better handling of filenames containing spaces.
