@@ -1,3 +1,7 @@
+2017-05-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* syslog-graph.sh: Created.
+
 2016-07-24  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* update-all.sh: Created.
