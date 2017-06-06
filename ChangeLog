@@ -1,3 +1,10 @@
+2017-05-06  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* syslog-graph.sh: Use temporary files in the temporary
+	directory, correctly filter out 1 Jan (when router was replaced),
+	look for just "WAN 1 is" for line failure, put ticks on outside,
+	change boundaries.
+
 2017-05-05  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* syslog-graph.sh: Created.
