@@ -1,0 +1,9 @@
+# Editor backups
+*~
+# Generated PDF
+*.pdf
+# Binaries
+rcmd-dump
+# data files
+*.dat
+*.csv

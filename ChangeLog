@@ -1,5 +1,14 @@
 2017-06-06  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	Yet another script to analyze syslogs. This time a bit more
+	generic in its processing capabilities by using SNOBOL4.
+
+	* .gitignore: Created.
+	* syslog-all.sh: Created.
+	* syslog-all.sno: Created.
+
+2017-06-06  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	* updown-graph.sh: Created.
 
 2017-06-06  Jeremy Bennett  <jeremy.bennett@embecosm.com>

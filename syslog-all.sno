@@ -1,0 +1,141 @@
+*	Usage:
+
+*	syslog-call.sno <infile> <upfile> <speedfile>
+
+*	infile - raw syslog ADSL and PPPoE lines
+*	upfile - graph data for DSL and PPPoE uptime
+*	speedfile - graph data for up/down speed, SNR and attenuation
+
+	argv = ARRAY('0:9')
+	i = 0
+	first_arg = HOST(3)
+	argv[i] = HOST(2, first_arg - 1)
+
+get_args
+	arg = HOST(2, first_arg + i)				:F(args_done)
+	i = i + 1
+	argv[i] = arg						:(get_args)
+
+args_done
+	argc = i + 1
+
+*	Get the argument
+
+	EQ(argc,4)						:S(args_ok)
+	TERMINAL = 'Usage: syslog-call.sno <infile> <upfile> '
++		   '<speedfile>'				:(END)
+
+args_ok
+	INPUT('rawdat',9,'',argv[1])
+	OUTPUT('updownout',10,'',argv[2])
+	OUTPUT('speedout',11,'',argv[3])
+
+*	Process the data
+*
+*	DSL failure is reported with 'Modem Shut Down from ADSL Phy Layer'
+*	DSL restart is reported with 'States=SHOWTIME'
+*	All failures lead to 'WAN 1 is down'
+*	All recoveries lead to 'WAN 1 is up'
+*
+*	All lines begin with a date and time stamp of the form:
+*       MMM DD HH:MM:SS
+
+	date_pat = POS(0) LEN(3) . mon ' ' LEN(2) . day ' '
++		   LEN(2) . hour ':' LEN(2) . min ':'
++		   LEN(2) . sec
+
+*	patern to match SHOWTIME data (values may be negative)
+
+	digits = '-0123456789'
+	show_pat = 'UpSpeed='
++	 	   SPAN(digits) . speed_up BREAK(digits)
++		   SPAN(digits) . speed_down BREAK(digits)
++		   SPAN(digits) . snr BREAK(digits)
++		   SPAN(digits) . atten
+
+*	Values for DSL and PPPoE up
+
+	d_up = 4
+	d_do = 1
+	p_up = 9
+	p_do = 6
+
+	dsl_state = d_up
+	ppp_state = p_up
+
+next_line
+	prev_line = line
+	line = rawdat						:F(data_done)
+
+	line 'Modem Shut Down from ADSL Phy Layer'		:S(dsl_down)
+	line 'States=SHOWTIME'	   	    			:S(dsl_up)
+	line 'WAN 1 is down'					:S(ppp_down)
+	line 'WAN 1 is up'					:S(ppp_up)
+								:(next_line)
+*	DSL failure
+
+dsl_down
+	new_dsl_state = NE(dsl_state,d_do) d_do			:F(next_line)
+	new_ppp_state = ppp_state				:(dat_out)
+
+dsl_up
+	new_dsl_state = NE(dsl_state,d_up) d_up			:F(show_only)
+	new_ppp_state = ppp_state				:(dat_out)
+
+ppp_down
+	new_ppp_state = NE(ppp_state,p_do) p_do			:F(next_line)
+	new_dsl_state = dsl_state   				:(dat_out)
+
+ppp_up
+	new_ppp_state = NE(ppp_state,p_up) p_up			:F(next_line)
+	new_dsl_state = dsl_state   				:(dat_out)
+
+*	Output some data. If we get here, something has changed. We reject
+*	January dates.
+
+dat_out
+	line date_pat
+	IDENT(mon,'Jan')					:S(next_line)
+	day ' ' = '0'
+	date = '2017-' mon '-' day '/' hour ':' min ':' sec
+
+*	Up-time/down-time data
+
+	updownout = date CHAR(9) dsl_state CHAR(9) ppp_state
+ 	updownout = date CHAR(9) new_dsl_state CHAR(9) new_ppp_state
+
+*	Update the states
+
+	dsl_state = new_dsl_state
+	ppp_state = new_ppp_state
+
+*	Optionally SHOWTIME data
+
+show_out
+	line show_pat						:F(next_line)
+
+	speedout = date CHAR(9) speed_up CHAR(9) speed_down
++		   CHAR(9) snr CHAR(9) atten			:(next_line)
+
+*	Not exactly tidy, but for the case where we have a SHOWTIME line, bt
+*	other data has not changed, we need to generate the date and then just
+*	put out the speed data.
+
+show_only
+
+	line date_pat
+	IDENT(mon,'Jan')					:S(next_line)
+	day ' ' = '0'
+	date = '2017-' mon '-' day '/' hour ':' min ':' sec	:(show_out)
+
+*	All done. We can put out one final line for the up time/down time graph
+
+data_done
+
+	prev_line date_pat
+	day ' ' = '0'
+	date = '2017-' mon '-' day '/' hour ':' min ':' sec
+
+	updownout = date CHAR(9) dsl_state CHAR(9) ppp_state
+
+END
