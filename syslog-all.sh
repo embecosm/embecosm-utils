@@ -124,6 +124,8 @@ set style line 2 lc rgb '#00ff00' lt 1 lw .2 pt 7 ps 1.5   # --- green
 set style line 3 lc rgb '#ff0000' lt 1 lw .2 pt 7 ps 1.5   # --- red
 set style line 4 lc rgb '#ffff00' lt 1 lw .2 pt 7 ps 1.5   # --- yellow
 
+set margins 12, 2, 4, 2
+
 set ylabel "status"
 set yrange ["0" : "12"]
 set ytics out nomirror ("DSL down" 1, "DSL up" 4, "PPP down" 6, "PPP up" 9)

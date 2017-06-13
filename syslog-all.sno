@@ -63,6 +63,11 @@ args_ok
 	dsl_state = d_up
 	ppp_state = p_up
 
+*	Count of failures
+
+	dsl_down_cnt = 0
+	ppp_down_cnt = 0
+
 next_line
 	prev_line = line
 	line = rawdat						:F(data_done)
@@ -76,7 +81,8 @@ next_line
 
 dsl_down
 	new_dsl_state = NE(dsl_state,d_do) d_do			:F(next_line)
-	new_ppp_state = ppp_state				:(dat_out)
+	new_ppp_state = ppp_state
+	dsl_down_cnt = dsl_down_cnt + 1				:(dat_out)
 
 dsl_up
 	new_dsl_state = NE(dsl_state,d_up) d_up			:F(show_only)
@@ -84,7 +90,8 @@ dsl_up
 
 ppp_down
 	new_ppp_state = NE(ppp_state,p_do) p_do			:F(next_line)
-	new_dsl_state = dsl_state   				:(dat_out)
+	new_dsl_state = dsl_state
+	ppp_down_cnt = ppp_down_cnt + 1				:(dat_out)
 
 ppp_up
 	new_ppp_state = NE(ppp_state,p_up) p_up			:F(next_line)
@@ -128,7 +135,8 @@ show_only
 	day ' ' = '0'
 	date = '2017-' mon '-' day '/' hour ':' min ':' sec	:(show_out)
 
-*	All done. We can put out one final line for the up time/down time graph
+*	All done. We can put out one final line for the up time/down time
+*	graph and note the total number of failures.
 
 data_done
 
@@ -137,5 +145,8 @@ data_done
 	date = '2017-' mon '-' day '/' hour ':' min ':' sec
 
 	updownout = date CHAR(9) dsl_state CHAR(9) ppp_state
+
+	OUTPUT = 'Total DSL failures:   ' dsl_down_cnt
+	OUTPUT = 'Total PPPoE failures: ' ppp_down_cnt
 
 END

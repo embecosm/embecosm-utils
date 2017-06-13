@@ -1,5 +1,11 @@
 2017-06-06  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
+	* syslog-all.sh: Fix the width of all plots.
+	* syslog-all.sno: Print out a count of how often DSL and PPP have
+	been down.
+
+2017-06-06  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
 	Yet another script to analyze syslogs. This time a bit more
 	generic in its processing capabilities by using SNOBOL4.
 
