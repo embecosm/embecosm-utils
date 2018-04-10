@@ -17,12 +17,21 @@
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
-INSTALLDIR = $(HOME)/bin
+INSTALLDIR ?= $(HOME)/bin
 
 CFLAGS = -g3 -O2
 
 C_PROGS = rcmd-dump
-SHELL_SCRIPTS = compress-pdf.sh
+
+SHELL_SCRIPTS = camera-off.sh   \
+                camera-on.sh    \
+                compress-pdf.sh \
+                syslog-all.sh   \
+                syslog-graph.sh \
+                update-all.sh   \
+                updown-graph.sh
+
+SNOBOL4_PROGS = syslog-all.sno
 
 # Build everything
 
@@ -36,6 +45,7 @@ all: $(C_PROGS) $(SHELL_SCRIPTS)
 install: all
 	cp $(C_PROGS) $(INSTALLDIR)
 	cp $(SHELL_SCRIPTS) $(INSTALLDIR)
+	cp $(SNOBOL4_PROGS) $(INSTALLDIR)
 
 # Clean up
 
