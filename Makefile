@@ -26,6 +26,7 @@ C_PROGS = rcmd-dump
 SHELL_SCRIPTS = camera-off.sh   \
                 camera-on.sh    \
                 compress-pdf.sh \
+		reverse-csv.sh  \
                 syslog-all.sh   \
                 syslog-graph.sh \
                 update-all.sh   \

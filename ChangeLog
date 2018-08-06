@@ -1,3 +1,8 @@
+2018-08-06  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* Makefile: Add reverse-csv.sh
+	* reverse-csv.sh: Created.
+
 2018-04-10  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* Makefile: Add missing scripts and programs.
