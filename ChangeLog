@@ -1,3 +1,11 @@
+2018-11-06  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	A wondrous script to dump out Thunderbird prefs in an order and
+	format that matches the configuration pages in the tool! Initial
+	version, so still has some rough edges
+
+	* thunder-prefs.sh: Created.
+
 2018-08-06  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	* Makefile: Add reverse-csv.sh
