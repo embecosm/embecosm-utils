@@ -1,3 +1,7 @@
+2019-02-21  Jeremy Bennett  <jeremy.bennett@embecosm.com>
+
+	* gpg-dump.sh: Created.
+
 2018-11-06  Jeremy Bennett  <jeremy.bennett@embecosm.com>
 
 	A wondrous script to dump out Thunderbird prefs in an order and
