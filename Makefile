@@ -27,6 +27,7 @@ SHELL_SCRIPTS = camera-off.sh   \
                 camera-on.sh    \
 	 	cfit.sh         \
                 compress-pdf.sh \
+		format-spec.sh  \
 		reverse-csv.sh  \
                 syslog-all.sh   \
                 syslog-graph.sh \
