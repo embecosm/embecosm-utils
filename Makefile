@@ -31,6 +31,7 @@ SHELL_SCRIPTS = camera-off.sh   \
 		reverse-csv.sh  \
                 syslog-all.sh   \
                 syslog-graph.sh \
+		tbsize.sh       \
                 update-all.sh   \
                 updown-graph.sh
 
