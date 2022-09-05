@@ -23,16 +23,16 @@ CFLAGS = -g3 -O2
 
 C_PROGS = rcmd-dump
 
-SHELL_SCRIPTS = camera-off.sh   \
-                camera-on.sh    \
-	 	cfit.sh         \
-                compress-pdf.sh \
-		format-spec.sh  \
-		reverse-csv.sh  \
-                syslog-all.sh   \
-                syslog-graph.sh \
-		tbsize.sh       \
-                update-all.sh   \
+SHELL_SCRIPTS = camera-off.sh      \
+                camera-on.sh       \
+	 	cfit.sh            \
+                compress-pdf.sh    \
+		format-spec.sh     \
+		reverse-csv.sh     \
+                syslog-all.sh      \
+                syslog-graph.sh    \
+		track-gcc-tests.sh \
+                update-all.sh      \
                 updown-graph.sh
 
 SNOBOL4_PROGS = syslog-all.sno
