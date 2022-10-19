@@ -12,21 +12,21 @@
 case $#
 in
     0)
-	sz=12
+	fsz=12
 	;;
     1)
 	case $1
 	in
 	    hd)
-		sz=12
+		fsz=12
 		;;
 
 	    4k)
-		sz=18
+		fsz=18
 		;;
 
 	    [0-9]*)
-		sz=$(echo $1 | sed -e 's/[^0-9]*//g')
+		fsz=$(echo $1 | sed -e 's/[^0-9]*//g')
 		;;
 
 	    *)
@@ -42,11 +42,15 @@ in
 	;;
 esac
 
+lsz=$(( fsz * 4 / 3 ))
+
 cd ${HOME}/.thunderbird
 
 for f in */chrome/userChrome.css
 do
-    sed -i -e "s/font-size: .\+px !important/font-size: ${sz}px !important/" ${f}
+    sed -i -e "s/font-size: .\+px !important/font-size: ${fsz}px !important/" ${f}
+    sed -i -e "s/height: .\+px !important/height: ${lsz}px !important/" ${f}
 done
 
-echo "Base font size set to ${sz}px. Will apply when Thunderbird is restarted"
+echo "Base font size set to ${fsz}px, line spacing ${lsz}px."
+echo "Will apply when Thunderbird is restarted"
