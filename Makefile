@@ -31,7 +31,7 @@ SHELL_SCRIPTS = camera-off.sh      \
 		reverse-csv.sh     \
                 syslog-all.sh      \
                 syslog-graph.sh    \
-		track-gcc-tests.sh \
+		track-gnu-tests.sh \
                 update-all.sh      \
                 updown-graph.sh
 
