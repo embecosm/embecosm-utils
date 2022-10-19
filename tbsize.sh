@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # A script to set the general font for Thunderbird.
 
@@ -8,6 +8,9 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # Optional argument is size to set as number of synonym
+
+# Make the argument test case insensitive
+shopt -s nocasematch
 
 case $#
 in
@@ -22,7 +25,7 @@ in
 		;;
 
 	    4k)
-		fsz=18
+		fsz=21
 		;;
 
 	    [0-9]*)
@@ -42,7 +45,7 @@ in
 	;;
 esac
 
-lsz=$(( fsz * 4 / 3 ))
+lsz=$(( ( 2 + fsz * 4 ) / 3 ))
 
 cd ${HOME}/.thunderbird
 
