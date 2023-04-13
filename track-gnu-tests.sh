@@ -162,23 +162,12 @@ then
 	cd ${testsuite_gcc}
 	for pref in gcc g++ gfortran
 	do
-	    # We ignore the base directories unless they are the only one.
-	    # The base directory is only dynamic in single threaded tests, for
-	    # multi-threaded tests it is the final consolidation.
-
-	    # Thus we will only look at the gcc directory if gcc1, gcc2,
-	    # ... don't exist.
-
-	    # And if the base directory doesn't exist, there is nothing to see
-	    # here!
-	    if [[ -e ${pref}1/${pref}.sum ]]
+	    # If the base directory doesn't exist, there is nothing to see here!
+	    if [[ -e ${pref}/${pref}.sum ]]
 	    then
-		do_counts ${pref} ${pref}?*/*.sum
-	    elif [[ -e ${pref}/${pref}.sum ]]
-	    then
-		do_counts ${pref} ${pref}/*.sum
+		do_counts ${pref} ${pref}*/*.sum
 	    else
-		echo "No test directories for ${pref}"
+		printf "\nNo test directories for ${pref}\n"
 		continue
 	    fi
 	done
