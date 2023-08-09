@@ -48,52 +48,51 @@ do_counts () {
     then
 	echo
 	echo "No test results for ${pref}"
-	continue
-    fi
-
-    # Put out the results
-    printf "\n"
-    printf "               === ${pref} Summary === \n"
-    printf "\n"
-    if [[ ${passno} != 0 ]]
-    then
-	printf "# of expected passes       %9d\n" ${passno}
-    fi
-    if [[ ${failno} != 0 ]]
-    then
-	printf "# of unexpected failures   %9d\n" ${failno}
-    fi
-    if [[ ${xpassno} != 0 ]]
-    then
-	printf "# of unexpected successes  %9d\n" ${xpassno}
-    fi
-    if [[ ${xfailno} != 0 ]]
-    then
-	printf "# of expected failures     %9d\n" ${xfailno}
-    fi
-    if [[ ${kfailno} != 0 ]]
-    then
-	printf "# of known failures        %9d\n" ${kfailno}
-    fi
-    if [[ ${unresolvedno} != 0 ]]
-    then
-	printf "# of unresolved testcases  %9d\n" ${unresolvedno}
-    fi
-    if [[ ${untestedno} != 0 ]]
-    then
-	printf "# of untested tests        %9d\n" ${untestedno}
-    fi
-    if [[ ${unsupportedno} != 0 ]]
-    then
-	printf "# of unsupported tests     %9d\n" ${unsupportedno}
-    fi
-    if [[ ${pathno} != 0 ]]
-    then
-	printf "# of paths in test names   %9d\n" ${pathno}
-    fi
-    if [[ ${duplicateno} != 0 ]]
-    then
-	printf "# of duplicate test names  %9d\n" ${duplicateno}
+    else
+	# Put out the results
+	printf "\n"
+	printf "               === ${pref} Summary === \n"
+	printf "\n"
+	if [[ ${passno} != 0 ]]
+	then
+	    printf "# of expected passes       %9d\n" ${passno}
+	fi
+	if [[ ${failno} != 0 ]]
+	then
+	    printf "# of unexpected failures   %9d\n" ${failno}
+	fi
+	if [[ ${xpassno} != 0 ]]
+	then
+	    printf "# of unexpected successes  %9d\n" ${xpassno}
+	fi
+	if [[ ${xfailno} != 0 ]]
+	then
+	    printf "# of expected failures     %9d\n" ${xfailno}
+	fi
+	if [[ ${kfailno} != 0 ]]
+	then
+	    printf "# of known failures        %9d\n" ${kfailno}
+	fi
+	if [[ ${unresolvedno} != 0 ]]
+	then
+	    printf "# of unresolved testcases  %9d\n" ${unresolvedno}
+	fi
+	if [[ ${untestedno} != 0 ]]
+	then
+	    printf "# of untested tests        %9d\n" ${untestedno}
+	fi
+	if [[ ${unsupportedno} != 0 ]]
+	then
+	    printf "# of unsupported tests     %9d\n" ${unsupportedno}
+	fi
+	if [[ ${pathno} != 0 ]]
+	then
+	    printf "# of paths in test names   %9d\n" ${pathno}
+	fi
+	if [[ ${duplicateno} != 0 ]]
+	then
+	    printf "# of duplicate test names  %9d\n" ${duplicateno}
+	fi
     fi
 }
 
